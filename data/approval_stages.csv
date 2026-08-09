@@ -1,0 +1,5 @@
+id,workflow_id,name,stage_order,approval_type,is_final_stage,created_at,updated_at
+27dba353-bee9-452e-b04c-2047857fcf97,e270a792-3288-48e5-9aa3-e9f2ee2a06d4,Coach Review,1,ANY,false,2026-08-01 09:00:00,2026-08-01 09:00:00
+4233d119-d012-4a72-87df-597cf1b2502e,e270a792-3288-48e5-9aa3-e9f2ee2a06d4,Admin Final Approval,2,ANY,true,2026-08-01 09:00:00,2026-08-01 09:00:00
+74615a30-f341-4b91-9607-a518620f72a5,c5c8aad1-106a-48c8-ad16-69308914038c,Coach Review,1,ANY,false,2026-08-01 09:00:00,2026-08-01 09:00:00
+91187734-c520-4e35-9311-9a8aad3b6439,c5c8aad1-106a-48c8-ad16-69308914038c,Admin Final Approval,2,ANY,true,2026-08-01 09:00:00,2026-08-01 09:00:00

@@ -1,0 +1,5 @@
+id,name,type,country,level,status,created_at,updated_at
+e185fce4-8efa-4a9c-aa12-cb7b9ab9d617,Premier League,LEAGUE,England,TIER_1,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00
+b4b90164-629c-4158-8111-dc05efa82e11,FA Cup,CUP,England,TIER_1,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00
+bdea28ed-59cf-4686-864e-5d135e28d02e,UEFA Champions League,CUP,Europe,TIER_1,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00
+21852e8a-da64-4c32-98d5-770074987be9,Championship,LEAGUE,England,TIER_2,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00

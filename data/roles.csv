@@ -1,0 +1,5 @@
+id,name,code,description,is_system_role,created_at,updated_at
+7c2b6a40-5b81-4fad-9c03-6338c7b32908,Club Administrator,CLUB_ADMIN,Full access to manage club data,false,2026-08-01 09:00:00,2026-08-01 09:00:00
+7697d0dc-69dc-4449-8c5a-ceafcb2057c8,Coach,COACH,Manages own teams and player data,false,2026-08-01 09:00:00,2026-08-01 09:00:00
+417d7464-7970-437c-af98-14c6a4f857a9,Analyst,ANALYST,Read-only access to reporting data,false,2026-08-01 09:00:00,2026-08-01 09:00:00
+68560c33-008f-4fcd-b551-88d16c21777f,System Owner,SYSTEM_OWNER,Built-in role with unrestricted access,true,2026-08-01 09:00:00,2026-08-01 09:00:00

@@ -1,0 +1,7 @@
+id,approval_request_id,approval_stage_id,action_by,action,comments,action_at
+987eeacd-ddf3-4482-876a-f9bb64277d6e,d0a6fa85-bd93-4135-b714-b2faae08ce50,27dba353-bee9-452e-b04c-2047857fcf97,ef1753b7-83d4-4098-b691-30f9e915db74,APPROVE,Roster looks good,2026-07-27 09:00:00
+a932e89c-8f5b-44f5-9510-f0a0d8da8201,d0a6fa85-bd93-4135-b714-b2faae08ce50,4233d119-d012-4a72-87df-597cf1b2502e,afbf3de4-6fcb-4c91-a231-487628fafedb,APPROVE,"Confirmed, approved",2026-07-28 09:00:00
+ec03cb1f-2946-4809-b410-e8db3c49eeef,622778d9-26a7-4e8a-a9fa-e3cd422250b7,27dba353-bee9-452e-b04c-2047857fcf97,6bf3e9fc-218c-40e1-83a5-508d43e9d3f2,COMMENT,Awaiting coach review,2026-07-31 09:00:00
+879dbcb5-8f60-465e-9afa-570bf1d38849,fb50b39a-acec-44bf-824c-72a0ca077968,27dba353-bee9-452e-b04c-2047857fcf97,bce7cf8f-501c-4640-8829-28bec5dfdf55,REJECT,Squad size exceeds limit,2026-07-23 09:00:00
+b7cafbbc-a2e5-4c7e-b059-a8d99d4c2c39,4a574858-6f2a-4e76-bfff-a6e7ea05ff23,74615a30-f341-4b91-9607-a518620f72a5,ef1753b7-83d4-4098-b691-30f9e915db74,APPROVE,Reference check complete,2026-07-25 09:00:00
+466a175b-8b57-4e5f-a313-f20484c2fa1f,4a574858-6f2a-4e76-bfff-a6e7ea05ff23,91187734-c520-4e35-9311-9a8aad3b6439,afbf3de4-6fcb-4c91-a231-487628fafedb,APPROVE,Onboarding approved,2026-07-26 09:00:00
