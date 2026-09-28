@@ -1,0 +1,5 @@
+id,opponent_club_id,name,short_name,team_type,gender,age_group,status,created_at,updated_at
+e8f7ce27-a930-4de5-8b04-9f3eda2a3a2b,cf153ac0-7e04-42a5-950a-6c5606b7b70e,Northbridge Rovers First Team,NBR 1st,SENIOR,MALE,SENIOR,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00
+2c900302-c9f3-4917-a3a8-2b13f3cccca1,3aab88d6-5cbc-4457-9651-82afb2b4cf1d,Southport Athletic First Team,SPA 1st,SENIOR,MALE,SENIOR,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00
+9c746ab9-c37f-43e5-9738-22575a81bcec,b1989b42-a2ab-4332-8445-cbd62775305e,Midlands United First Team,MDU 1st,SENIOR,MALE,SENIOR,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00
+27861fec-a980-4357-a6ca-b3dbb627d295,a130ed08-8109-4a96-a68d-39a598ced0ce,Riverside Town First Team,RST 1st,SENIOR,MALE,SENIOR,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00

@@ -1,0 +1,4 @@
+id,name,source_type,provider,base_url,is_active,configuration,created_at,updated_at
+6d91ffee-de75-48a1-8f4d-5ef8f2e31636,Manual entry,MANUAL,,,true,,2026-08-01 09:00:00,2026-08-01 09:00:00
+10c8b601-90e7-4b6a-96b0-509c3e31be2a,Match stats CSV upload,CSV,Internal,,true,"{""delimiter"": "","", ""encoding"": ""utf-8""}",2026-08-01 09:00:00,2026-08-01 09:00:00
+f5f97462-0bc0-43a4-b553-bd6198aebfcd,Fixtures API,API,ExampleFootballData,https://api.example.com/v1,true,"{""rate_limit_per_min"": 60}",2026-08-01 09:00:00,2026-08-01 09:00:00

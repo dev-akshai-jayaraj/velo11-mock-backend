@@ -44,6 +44,8 @@ def _deserialize(raw: str | None, ftype: FieldType) -> Any:
         return raw
     if ftype == FieldType.INT:
         return int(raw)
+    if ftype == FieldType.FLOAT:
+        return float(raw)
     if ftype == FieldType.BOOL:
         return raw.strip().lower() in ("true", "1", "yes")
     if ftype == FieldType.UUID:

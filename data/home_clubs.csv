@@ -1,4 +1,4 @@
 id,name,short_name,logo_url,country,timezone,primary_color,secondary_color,home_venue_id,status,created_at,updated_at
-7bd6588d-07b6-4eb4-9c92-1333be5559e1,Manchester Reds,MCR,https://example.com/logos/mcr.png,England,Europe/London,#DA291C,#FBE122,ec758d42-8a96-4970-a616-efebc17ca76c,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00
-4d465211-b30e-4feb-b647-edf6417fd315,Liverpool Kickers,LVK,https://example.com/logos/lvk.png,England,Europe/London,#C8102E,#00B2A9,dce64043-c613-462e-a551-9b82f5f9aa43,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00
-c09a927d-7c8f-4e2c-a547-7cef39125b14,London Gunners,LDG,https://example.com/logos/ldg.png,England,Europe/London,#EF0107,#9C824A,f71d1c50-2ba1-49fb-ae1e-7e3720162518,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00
+2e2f9bf2-bb80-4a43-97d0-a98663c25e31,Manchester Reds,MCR,https://example.com/logos/mcr.png,England,Europe/London,#DA291C,#FBE122,32ca430e-bf32-4cb5-9617-63ddabbff7e2,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00
+303d08c5-7527-4ad6-8311-a93af6fa9c54,Liverpool Kickers,LVK,https://example.com/logos/lvk.png,England,Europe/London,#C8102E,#00B2A9,8d001cf9-7909-4e97-a50d-08a95f0c36bd,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00
+be1be93f-d044-4321-bc0e-7f202df367a3,London Gunners,LDG,https://example.com/logos/ldg.png,England,Europe/London,#EF0107,#9C824A,c201354f-a4d2-4c70-ba2c-f9bbad9379ca,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00

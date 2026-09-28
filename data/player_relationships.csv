@@ -1,0 +1,3 @@
+id,own_team_id,player_a_id,player_b_id,relationship_type,score,sample_size,evidence,calculated_at,created_at,updated_at
+c2082db6-24ee-46b8-b93f-d1dd4ffe5e3d,dc3e632f-f76e-4d7e-bb52-c3f2db34c898,3be2cdd7-e605-44ad-90fb-54e7be3f68ed,3b0fa669-564c-494d-9de2-7521ca120b3f,PARTNERSHIP,0.82,3,"{""shared_minutes"": 270}",2026-08-01 09:00:00,2026-08-01 09:00:00,2026-08-01 09:00:00
+3e8c30bd-16b5-4feb-94f7-d447766092d8,dc3e632f-f76e-4d7e-bb52-c3f2db34c898,c7ffbd71-45b4-43c6-84cf-111cc9232141,e8878fbc-cab2-44bb-9613-a9598efa436e,PASSING_LINK,0.74,3,"{""passes_between"": 41}",2026-08-01 09:00:00,2026-08-01 09:00:00,2026-08-01 09:00:00

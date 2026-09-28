@@ -12,6 +12,19 @@ from app.store.repository import CsvRepository
 _RESERVED_QUERY_PARAMS = {"skip", "limit", "sort_by", "sort_order"}
 
 
+def _singularize(resource: str) -> str:
+    """Best-effort singular for response messages ("Matches" -> "Match")."""
+    if resource.endswith("yses"):
+        return resource[:-2] + "is"
+    if resource.endswith("ies"):
+        return resource[:-3] + "y"
+    if resource.endswith(("ches", "shes", "sses", "xes")):
+        return resource[:-2]
+    if resource.endswith("s") and not resource.endswith(("Stats", "ss")):
+        return resource[:-1]
+    return resource
+
+
 def build_crud_router(
     *,
     crud: CsvRepository,
@@ -29,7 +42,7 @@ def build_crud_router(
 
     router = APIRouter(prefix=prefix, tags=tags)
     resource = tags[0]
-    singular = resource[:-1] if resource.endswith("s") else resource
+    singular = _singularize(resource)
 
     @router.get(
         "/", response_model=APIResponse[list[read_schema]], summary=f"List {resource}"

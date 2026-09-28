@@ -1,0 +1,4 @@
+id,player_id,own_team_id,availability_status,reason_type,reason,start_date,expected_return_date,actual_return_date,medical_notes,created_at,updated_at
+805100d0-740d-4da3-b5cd-eba8ae32ac50,84ed79c7-5d5f-48b7-899d-9ed095d70650,dc3e632f-f76e-4d7e-bb52-c3f2db34c898,INJURED,INJURY,Hamstring strain,2026-07-25,2026-08-15,,"Grade 1 strain, progressing well",2026-08-01 09:00:00,2026-08-01 09:00:00
+9f83575e-0f65-48cd-840a-9a668119f2a8,4a7b5de7-846c-4400-8d07-bc53ce6bd4f5,dc3e632f-f76e-4d7e-bb52-c3f2db34c898,SUSPENDED,SUSPENSION,Accumulated yellow cards,2026-08-01,2026-08-08,,,2026-08-01 09:00:00,2026-08-01 09:00:00
+d5894361-c588-4b14-b2ed-d22a98c4abc3,c7ffbd71-45b4-43c6-84cf-111cc9232141,dc3e632f-f76e-4d7e-bb52-c3f2db34c898,AVAILABLE,ILLNESS,Flu,2026-07-10,2026-07-14,2026-07-13,,2026-08-01 09:00:00,2026-08-01 09:00:00

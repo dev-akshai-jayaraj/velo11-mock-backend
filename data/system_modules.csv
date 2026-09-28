@@ -1,5 +1,5 @@
 id,name,code,description,is_active,created_at,updated_at
-a2672856-c100-47e9-9874-205ae139e16e,Own Teams,OWN_TEAMS,Own team management module,true,2026-08-01 09:00:00,2026-08-01 09:00:00
-99dfbdaf-34df-4b77-bfd7-b8fe0ea74236,Users,USERS,User management module,true,2026-08-01 09:00:00,2026-08-01 09:00:00
-fd452430-fcca-4c55-999e-4a07df064320,Approvals,APPROVALS,Approval workflow engine,true,2026-08-01 09:00:00,2026-08-01 09:00:00
-a8ca7b24-ee5d-4957-a55c-c1a5fa1e77d3,Audit,AUDIT,Audit logging module,true,2026-08-01 09:00:00,2026-08-01 09:00:00
+9678acc2-ecbc-41fd-8e29-67d46cb5facf,Own Teams,OWN_TEAMS,Own team management module,true,2026-08-01 09:00:00,2026-08-01 09:00:00
+ff2aa2da-6433-465f-a89f-889440eef60f,Users,USERS,User management module,true,2026-08-01 09:00:00,2026-08-01 09:00:00
+e7340305-5877-446d-933f-c86c5265ce14,Approvals,APPROVALS,Approval workflow engine,true,2026-08-01 09:00:00,2026-08-01 09:00:00
+2765fe24-4116-4652-888d-1204a8687a09,Audit,AUDIT,Audit logging module,true,2026-08-01 09:00:00,2026-08-01 09:00:00

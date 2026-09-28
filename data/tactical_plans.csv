@@ -1,0 +1,2 @@
+id,match_id,own_team_id,created_by,formation,game_model,in_possession_plan,out_of_possession_plan,transition_plan,pressing_plan,notes,status,created_at,updated_at
+587eeed7-0864-4764-af9c-9004cefa95fc,40891327-9621-4688-a8ea-d8cc5286b07e,dc3e632f-f76e-4d7e-bb52-c3f2db34c898,9cb805d6-dcf1-4da2-ad45-4f7f6de3a05e,4-3-3,Positional play,"Build through the pivot, overload the right half-space.","Mid block, force play wide.","Immediate counter-press for 5 seconds, then recover.",Press trigger: backward pass to centre-back.,,DRAFT,2026-08-01 09:00:00,2026-08-01 09:00:00

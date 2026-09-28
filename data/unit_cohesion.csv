@@ -1,0 +1,4 @@
+id,own_team_id,season_id,unit_type,unit_name,score,evidence,calculated_at,created_at,updated_at
+0bd83357-3d8f-4635-8e1f-0f01a3446ca5,dc3e632f-f76e-4d7e-bb52-c3f2db34c898,2a1d0316-1f49-4f94-b82b-f993e5a148e8,DEFENSE,Back four,7.9,"{""matches"": 3}",2026-08-01 09:00:00,2026-08-01 09:00:00,2026-08-01 09:00:00
+5dd5635a-eae6-492a-9972-cd6cba14c77c,dc3e632f-f76e-4d7e-bb52-c3f2db34c898,2a1d0316-1f49-4f94-b82b-f993e5a148e8,MIDFIELD,Midfield three,7.1,"{""matches"": 3}",2026-08-01 09:00:00,2026-08-01 09:00:00,2026-08-01 09:00:00
+c7ab1941-6df3-4816-b312-beb6ae80c3e4,dc3e632f-f76e-4d7e-bb52-c3f2db34c898,2a1d0316-1f49-4f94-b82b-f993e5a148e8,ATTACK,Front three,6.8,"{""matches"": 3}",2026-08-01 09:00:00,2026-08-01 09:00:00,2026-08-01 09:00:00

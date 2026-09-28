@@ -1,0 +1,2 @@
+id,own_team_id,season_id,assessed_at,assessed_by,cohesion_score,chemistry_score,leadership_score,morale_score,notes,evidence,created_at,updated_at
+6d5d7396-27a2-4566-910c-ff1e34418fd3,dc3e632f-f76e-4d7e-bb52-c3f2db34c898,2a1d0316-1f49-4f94-b82b-f993e5a148e8,2026-07-30 09:00:00,9cb805d6-dcf1-4da2-ad45-4f7f6de3a05e,7.5,7.0,8.0,7.8,Good response after the cup defeat.,"{""training_sessions_observed"": 4}",2026-08-01 09:00:00,2026-08-01 09:00:00

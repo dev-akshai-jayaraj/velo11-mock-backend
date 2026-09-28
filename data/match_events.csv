@@ -1,0 +1,6 @@
+id,match_id,team_scope,player_id,event_type,minute,second,period,x,y,outcome,details,source_type,created_at
+df582a70-21e1-43fa-a9e9-12000785ee35,59351c08-d6b4-44b0-9ba2-4455964069d9,OWN,e8878fbc-cab2-44bb-9613-a9598efa436e,GOAL,23,0,1H,88.0,45.0,SUCCESS,"{""assist_player_id"": ""c7ffbd71-45b4-43c6-84cf-111cc9232141""}",MANUAL,2026-08-01 09:00:00
+da8d1492-6684-4765-8c2a-8cf3103e75ed,59351c08-d6b4-44b0-9ba2-4455964069d9,OWN,4a7b5de7-846c-4400-8d07-bc53ce6bd4f5,YELLOW_CARD,38,0,1H,55.0,30.0,,"{""reason"": ""Tactical foul""}",MANUAL,2026-08-01 09:00:00
+0e55af56-7887-462e-97b0-9cd4de4d3de8,59351c08-d6b4-44b0-9ba2-4455964069d9,OPPONENT,,GOAL,61,0,2H,12.0,40.0,SUCCESS,"{""scorer_name"": ""Opponent #9""}",MANUAL,2026-08-01 09:00:00
+53db68d9-9505-453e-801c-c3624848e1a4,59351c08-d6b4-44b0-9ba2-4455964069d9,OWN,c7ffbd71-45b4-43c6-84cf-111cc9232141,GOAL,79,0,2H,84.0,60.0,SUCCESS,"{""body_part"": ""LEFT_FOOT""}",MANUAL,2026-08-01 09:00:00
+2d9dc806-ec97-4370-9f9e-efef7a0ff0ab,59351c08-d6b4-44b0-9ba2-4455964069d9,OWN,,SUBSTITUTION,75,0,2H,,,,"{""note"": ""LW off, fresh legs""}",MANUAL,2026-08-01 09:00:00

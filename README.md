@@ -32,18 +32,54 @@ app/
 data/
   *.csv            the actual dataset the API reads and writes, one file per entity
 db/
-  schema.sql       Postgres DDL, kept for the future migration
+  football_intelligence_expanded.dbml   current ERD (source of truth for app/store/registry.py)
+  schema.sql       Postgres DDL for the original 18 tables, kept for the future migration
 scripts/
   generate_mock_data.py   (re)generates data/*.csv with a consistent, FK-valid mock dataset
 main.py            dev entrypoint (uvicorn runner)
 ```
 
-Every table in the ERD (home_clubs, venues, own_teams, users, roles, permissions,
-user_roles, role_permissions, seasons, competitions, player_positions,
-system_modules, approval_workflows, approval_stages, approval_stage_approvers,
-approval_requests, approval_actions, audit_logs) gets a full REST resource at
-`/api/v1/<resource>` with `GET /`, `POST /`, `GET /{id}`, `PATCH /{id}`, `DELETE /{id}`
-(audit logs are read/create only — no update, since they're an immutable log).
+The source-of-truth ERD is [db/football_intelligence_expanded.dbml](db/football_intelligence_expanded.dbml).
+Every table in it gets a full REST resource at `/api/v1/<resource>` with `GET /`, `POST /`,
+`GET /{id}`, `PATCH /{id}`, `DELETE /{id}` (audit logs and analytics snapshots are
+read/create only, because they are immutable records). 47 resources in total:
+
+| Area | Resources |
+|---|---|
+| Foundation | home-clubs, venues, own-teams, users, roles, permissions, user-roles, role-permissions, seasons, competitions, player-positions, system-modules, approval-*, audit-logs |
+| Squad & opposition | players, team-players, player-availability, opponent-clubs, opponent-teams, competition-seasons, team-competitions |
+| Fixtures & matches | fixtures, matches, match-contexts, match-lineups, match-lineup-players, match-events |
+| Statistics | player-match-stats, team-match-stats, player-season-stats, team-season-stats |
+| Match preparation | scouting-notes, opposition-analyses, tactical-plans, set-piece-plans |
+| Team dynamics | team-dynamics-assessments, player-relationships, unit-cohesion |
+| Insights | analytics-snapshots, recommendations, reports |
+| Data ingestion | data-sources, data-imports |
+
+A **fixture** is the scheduled game. A **match** is its 1:1 result and analysis workspace
+(`matches.fixture_id` is unique), so pre-match planning can exist before kickoff.
+All lineups, events, stats and plans hang off the match.
+
+### Domain validation (on create)
+
+On top of FK, unique and delete-restrict checks, the schemas enforce these rules
+(422 `VALIDATION_ERROR` on violation):
+
+- Enums the ERD spells out: `venue_side` (HOME/AWAY/NEUTRAL), `team_scope` (OWN/OPPONENT),
+  `result` (WIN/DRAW/LOSS), set-piece `phase` (ATTACKING/DEFENDING), data source
+  `source_type` (MANUAL/CSV/EXCEL/API/SCRAPER).
+- `matches.result` is derived from `own_score`/`opponent_score` when both are given (also on
+  PATCH), and a contradicting result is rejected.
+- A lineup player needs exactly one of `player_id` (own squad) or `opponent_player_name`.
+  Opposition players aren't player records, so an `OPPONENT` match event can't carry a `player_id`.
+- `player_relationships` needs two different players. A scouting note must reference a
+  player, an opponent team or a match.
+- Date ordering (`joined_at ≤ left_at`, `start_date ≤ return dates`, `kickoff ≤ finished`).
+  Non-negative counts. `shots_on_target ≤ shots`, `passes_completed ≤ passes_attempted`,
+  `wins+draws+losses ≤ matches_played`, `processed+failed ≤ received`. Percentages are
+  0–100 and recommendation `confidence` is 0–1.
+
+Cross-field rules are checked on create only (and for the match result on PATCH when both
+scores are sent), because a partial PATCH doesn't carry the rest of the row.
 
 ## Data backend
 
@@ -105,7 +141,12 @@ rather than silently ignoring it.
    This (re)writes every file under `data/` with a consistent, FK-valid dataset: 3 clubs each
    with a venue and two own-teams, 6 users, 4 roles with permissions granted, 3 seasons, 4
    competitions, the 10 standard player positions, an approval workflow with stages/approvers/
-   sample requests, and audit log entries. Re-run any time to reset to a clean dataset.
+   sample requests, and audit log entries. It also seeds the football domain: 4 opponent clubs and
+   teams, an 11-player squad per first team, and for the Manchester Reds first team 3 played matches
+   plus 1 upcoming one. The played matches have lineups, events and player/team stats, and the season
+   stats are aggregated from those match stats. The upcoming match has scouting, opposition analysis
+   and tactical and set-piece plans. There's also sample availability, team-dynamics, analytics,
+   recommendation, report and data-import rows. Re-run any time to reset to a clean dataset.
 
 3. Run the API:
 
@@ -172,12 +213,14 @@ envelope itself.
   nothing currently verifies against it.
 - IDs are UUIDs generated in-app (`uuid.uuid4()`), stored as text in the CSV.
 - `postman/Football_Intelligence_App.postman_collection.json` — a ready-to-import Postman
-  collection covering all 18 resources (list/create/get/update/delete), ordered so foreign-key
-  dependencies resolve when run top-to-bottom via Collection Runner, with 171 saved example
-  responses (Success, Validation Error, Conflict, Not Found as applicable) and test scripts
-  that assert the envelope shape. Captured live against the CSV backend with the mock dataset
-  pre-loaded. A collection-level pre-request script generates a random `run_suffix` variable
-  once per run, which several Create bodies embed into their unique fields (role code, user
-  email, season name, player position code, system module code, permission action code) —
-  so the collection can be run repeatedly against the same persistent dataset without ever
-  hitting a `409` conflict from its own past runs or from the seed data.
+  collection covering all 47 resources: 254 requests, 466 saved example responses (Success,
+  Validation Error, Conflict, Not Found and rule-specific errors), and a status-code test on
+  every request. Examples were captured live against the CSV backend with the mock dataset loaded.
+  - **Run order:** a top-to-bottom run (Collection Runner / newman) satisfies every foreign key.
+    Each Create saves its id to a collection variable, and nothing is deleted until the final
+    **Cleanup** folder, which removes everything the run created, children first. A run leaves
+    the dataset exactly as it found it.
+  - **Validation Rules** folder: negative tests for the domain rules above. It changes no data.
+  - A collection-level pre-request script sets a random `run_suffix` once per run, embedded in
+    unique fields (role code, user email, season name, player display name, …), so the
+    collection can be re-run against the same persistent dataset without `409` conflicts.

@@ -86,3 +86,53 @@ class PlayerPositionRead(PlayerPositionBase):
     id: uuid.UUID
     created_at: datetime
     updated_at: datetime
+
+
+class CompetitionSeasonBase(BaseModel):
+    competition_id: uuid.UUID
+    season_id: uuid.UUID
+    status: str = "ACTIVE"
+
+
+class CompetitionSeasonCreate(CompetitionSeasonBase):
+    pass
+
+
+class CompetitionSeasonUpdate(BaseModel):
+    competition_id: uuid.UUID | None = None
+    season_id: uuid.UUID | None = None
+    status: str | None = None
+
+
+class CompetitionSeasonRead(CompetitionSeasonBase):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: uuid.UUID
+    created_at: datetime
+    updated_at: datetime
+
+
+class TeamCompetitionBase(BaseModel):
+    own_team_id: uuid.UUID
+    competition_season_id: uuid.UUID
+    is_primary: bool = False
+    status: str = "ACTIVE"
+
+
+class TeamCompetitionCreate(TeamCompetitionBase):
+    pass
+
+
+class TeamCompetitionUpdate(BaseModel):
+    own_team_id: uuid.UUID | None = None
+    competition_season_id: uuid.UUID | None = None
+    is_primary: bool | None = None
+    status: str | None = None
+
+
+class TeamCompetitionRead(TeamCompetitionBase):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: uuid.UUID
+    created_at: datetime
+    updated_at: datetime

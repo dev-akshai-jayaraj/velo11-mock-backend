@@ -1,0 +1,1110 @@
+// Football Intelligence Platform - Phase 1 DBML - Extended - 22/03/2026
+
+Project football_intelligence_phase1 {
+  database_type: 'PostgreSQL'
+  Note: 'Expanded football intelligence ERD. Extends the Phase 1 foundation with players, opponents, fixtures, match analysis, statistics, availability, scouting, tactics, analytics, reports, and data ingestion.'
+}
+
+Table home_clubs {
+  id uuid [pk]
+  name varchar [not null]
+  short_name varchar
+  logo_url varchar
+  country varchar
+  timezone varchar
+  primary_color varchar
+  secondary_color varchar
+  home_venue_id uuid
+  status varchar [not null, default: 'ACTIVE']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    name
+    status
+  }
+}
+
+Table users {
+  id uuid [pk]
+  home_club_id uuid [not null]
+  first_name varchar [not null]
+  last_name varchar
+  email varchar [not null, unique]
+  password_hash varchar [not null]
+  phone varchar
+  status varchar [not null, default: 'ACTIVE']
+  last_login_at timestamp
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    home_club_id
+    email [unique]
+    status
+  }
+}
+
+Table roles {
+  id uuid [pk]
+  name varchar [not null]
+  code varchar [not null, unique]
+  description text
+  is_system_role boolean [not null, default: false]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    code [unique]
+  }
+}
+
+Table permissions {
+  id uuid [pk]
+  module_code varchar [not null]
+  action_code varchar [not null]
+  name varchar [not null]
+  description text
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (module_code, action_code) [unique]
+  }
+}
+
+Table user_roles {
+  id uuid [pk]
+  user_id uuid [not null]
+  role_id uuid [not null]
+  assigned_at timestamp [not null]
+  assigned_by uuid
+
+  indexes {
+    (user_id, role_id) [unique]
+    user_id
+    role_id
+  }
+}
+
+Table role_permissions {
+  id uuid [pk]
+  role_id uuid [not null]
+  permission_id uuid [not null]
+  created_at timestamp [not null]
+
+  indexes {
+    (role_id, permission_id) [unique]
+    role_id
+    permission_id
+  }
+}
+
+Table own_teams {
+  id uuid [pk]
+  home_club_id uuid [not null]
+  name varchar [not null]
+  short_name varchar
+  team_type varchar
+  gender varchar
+  age_group varchar
+  status varchar [not null, default: 'ACTIVE']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    home_club_id
+    status
+  }
+}
+
+Table venues {
+  id uuid [pk]
+  name varchar [not null]
+  country varchar
+  city varchar
+  address text
+  surface_type varchar
+  capacity int
+  is_home_venue boolean [not null, default: false]
+  status varchar [not null, default: 'ACTIVE']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    name
+    city
+    status
+  }
+}
+
+Table seasons {
+  id uuid [pk]
+  name varchar [not null]
+  start_date date
+  end_date date
+  is_active boolean [not null, default: false]
+  status varchar [not null, default: 'ACTIVE']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    name [unique]
+    is_active
+    status
+  }
+}
+
+Table competitions {
+  id uuid [pk]
+  name varchar [not null]
+  type varchar
+  country varchar
+  level varchar
+  status varchar [not null, default: 'ACTIVE']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    name
+    status
+  }
+}
+
+Table player_positions {
+  id uuid [pk]
+  name varchar [not null]
+  code varchar [not null, unique]
+  position_group varchar
+  display_order int
+  status varchar [not null, default: 'ACTIVE']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    code [unique]
+    position_group
+    status
+  }
+}
+
+Table system_modules {
+  id uuid [pk]
+  name varchar [not null]
+  code varchar [not null, unique]
+  description text
+  is_active boolean [not null, default: true]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    code [unique]
+    is_active
+  }
+}
+
+Table approval_workflows {
+  id uuid [pk]
+  module_id uuid [not null]
+  name varchar [not null]
+  code varchar [not null]
+  is_required boolean [not null, default: false]
+  is_active boolean [not null, default: true]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (module_id, code) [unique]
+    module_id
+    is_active
+  }
+}
+
+Table approval_stages {
+  id uuid [pk]
+  workflow_id uuid [not null]
+  name varchar [not null]
+  stage_order int [not null]
+  approval_type varchar [not null, default: 'ANY']
+  is_final_stage boolean [not null, default: false]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (workflow_id, stage_order) [unique]
+    workflow_id
+  }
+}
+
+Table approval_stage_approvers {
+  id uuid [pk]
+  approval_stage_id uuid [not null]
+  role_id uuid
+  user_id uuid
+  approver_type varchar [not null, default: 'ROLE']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    approval_stage_id
+    role_id
+    user_id
+  }
+}
+
+Table approval_requests {
+  id uuid [pk]
+  workflow_id uuid [not null]
+  module_id uuid [not null]
+  record_id uuid [not null]
+  record_type varchar [not null]
+  current_status varchar [not null, default: 'SUBMITTED']
+  current_stage_order int
+  submitted_by uuid [not null]
+  submitted_at timestamp
+  completed_at timestamp
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    workflow_id
+    module_id
+    record_id
+    current_status
+    submitted_by
+  }
+}
+
+Table approval_actions {
+  id uuid [pk]
+  approval_request_id uuid [not null]
+  approval_stage_id uuid
+  action_by uuid [not null]
+  action varchar [not null]
+  comments text
+  action_at timestamp [not null]
+
+  indexes {
+    approval_request_id
+    approval_stage_id
+    action_by
+    action
+  }
+}
+
+Table audit_logs {
+  id uuid [pk]
+  module_code varchar [not null]
+  record_id uuid [not null]
+  action varchar [not null]
+  changed_by uuid
+  old_value jsonb
+  new_value jsonb
+  source_type varchar [not null, default: 'MANUAL']
+  changed_at timestamp [not null]
+
+  indexes {
+    module_code
+    record_id
+    action
+    changed_by
+    changed_at
+  }
+}
+
+
+Table opponent_clubs {
+  id uuid [pk]
+  name varchar [not null]
+  short_name varchar
+  logo_url varchar
+  country varchar
+  city varchar
+  status varchar [not null, default: 'ACTIVE']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    name
+    country
+    status
+  }
+}
+
+Table opponent_teams {
+  id uuid [pk]
+  opponent_club_id uuid [not null]
+  name varchar [not null]
+  short_name varchar
+  team_type varchar
+  gender varchar
+  age_group varchar
+  status varchar [not null, default: 'ACTIVE']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    opponent_club_id
+    name
+    status
+  }
+}
+
+Table players {
+  id uuid [pk]
+  first_name varchar [not null]
+  last_name varchar
+  display_name varchar [not null]
+  date_of_birth date
+  nationality varchar
+  preferred_foot varchar
+  height_cm int
+  weight_kg numeric
+  primary_position_id uuid
+  photo_url varchar
+  external_reference varchar
+  status varchar [not null, default: 'ACTIVE']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    display_name
+    primary_position_id
+    nationality
+    status
+  }
+}
+
+Table team_players {
+  id uuid [pk]
+  own_team_id uuid [not null]
+  player_id uuid [not null]
+  season_id uuid [not null]
+  squad_number int
+  position_id uuid
+  joined_at date
+  left_at date
+  is_captain boolean [not null, default: false]
+  status varchar [not null, default: 'ACTIVE']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (own_team_id, player_id, season_id) [unique]
+    own_team_id
+    player_id
+    season_id
+    position_id
+    status
+  }
+}
+
+Table competition_seasons {
+  id uuid [pk]
+  competition_id uuid [not null]
+  season_id uuid [not null]
+  status varchar [not null, default: 'ACTIVE']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (competition_id, season_id) [unique]
+    competition_id
+    season_id
+    status
+  }
+}
+
+Table team_competitions {
+  id uuid [pk]
+  own_team_id uuid [not null]
+  competition_season_id uuid [not null]
+  is_primary boolean [not null, default: false]
+  status varchar [not null, default: 'ACTIVE']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (own_team_id, competition_season_id) [unique]
+    own_team_id
+    competition_season_id
+    status
+  }
+}
+
+// A fixture is the scheduled game.
+// It remains distinct from the match analysis workspace so pre-match planning
+// can exist before the game is played.
+Table fixtures {
+  id uuid [pk]
+  own_team_id uuid [not null]
+  opponent_team_id uuid [not null]
+  competition_season_id uuid
+  venue_id uuid
+  scheduled_at timestamp [not null]
+  venue_side varchar [not null] // HOME, AWAY, NEUTRAL
+  round_name varchar
+  matchweek int
+  status varchar [not null, default: 'SCHEDULED']
+  source_type varchar [not null, default: 'MANUAL']
+  external_reference varchar
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    own_team_id
+    opponent_team_id
+    competition_season_id
+    scheduled_at
+    status
+  }
+}
+
+// A match is the analysis/workspace record linked to a fixture.
+// It can hold pre-match, in-match and post-match workflow state.
+Table matches {
+  id uuid [pk]
+  fixture_id uuid [not null, unique]
+  own_score int
+  opponent_score int
+  halftime_own_score int
+  halftime_opponent_score int
+  result varchar // WIN, DRAW, LOSS
+  analysis_status varchar [not null, default: 'PRE_MATCH']
+  kickoff_at timestamp
+  finished_at timestamp
+  notes text
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    fixture_id [unique]
+    result
+    analysis_status
+  }
+}
+
+Table match_contexts {
+  id uuid [pk]
+  match_id uuid [not null, unique]
+  importance varchar
+  competition_context text
+  schedule_context text
+  travel_context text
+  weather_context text
+  pitch_context text
+  expected_conditions jsonb
+  analyst_notes text
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    match_id [unique]
+    importance
+  }
+}
+
+Table match_lineups {
+  id uuid [pk]
+  match_id uuid [not null]
+  team_scope varchar [not null] // OWN, OPPONENT
+  formation varchar
+  lineup_type varchar [not null, default: 'STARTING']
+  confirmed_at timestamp
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    match_id
+    team_scope
+    lineup_type
+  }
+}
+
+Table match_lineup_players {
+  id uuid [pk]
+  lineup_id uuid [not null]
+  player_id uuid
+  opponent_player_name varchar
+  position_id uuid
+  shirt_number int
+  is_starter boolean [not null, default: true]
+  minute_on int
+  minute_off int
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    lineup_id
+    player_id
+    position_id
+  }
+}
+
+Table match_events {
+  id uuid [pk]
+  match_id uuid [not null]
+  team_scope varchar [not null] // OWN, OPPONENT
+  player_id uuid
+  event_type varchar [not null]
+  minute int
+  second int
+  period varchar
+  x numeric
+  y numeric
+  outcome varchar
+  details jsonb
+  source_type varchar [not null, default: 'MANUAL']
+  created_at timestamp [not null]
+
+  indexes {
+    match_id
+    team_scope
+    player_id
+    event_type
+    minute
+  }
+}
+
+Table player_match_stats {
+  id uuid [pk]
+  match_id uuid [not null]
+  player_id uuid [not null]
+  own_team_id uuid [not null]
+  minutes_played int [not null, default: 0]
+  started boolean [not null, default: false]
+  goals int [not null, default: 0]
+  assists int [not null, default: 0]
+  shots int [not null, default: 0]
+  shots_on_target int [not null, default: 0]
+  passes_attempted int [not null, default: 0]
+  passes_completed int [not null, default: 0]
+  tackles int [not null, default: 0]
+  interceptions int [not null, default: 0]
+  clearances int [not null, default: 0]
+  touches int [not null, default: 0]
+  yellow_cards int [not null, default: 0]
+  red_cards int [not null, default: 0]
+  xg numeric
+  xa numeric
+  extended_stats jsonb
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (match_id, player_id) [unique]
+    match_id
+    player_id
+    own_team_id
+  }
+}
+
+Table team_match_stats {
+  id uuid [pk]
+  match_id uuid [not null]
+  team_scope varchar [not null] // OWN, OPPONENT
+  possession_pct numeric
+  shots int
+  shots_on_target int
+  passes_attempted int
+  passes_completed int
+  pass_completion_pct numeric
+  corners int
+  fouls int
+  offsides int
+  yellow_cards int
+  red_cards int
+  xg numeric
+  extended_stats jsonb
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (match_id, team_scope) [unique]
+    match_id
+    team_scope
+  }
+}
+
+Table player_season_stats {
+  id uuid [pk]
+  player_id uuid [not null]
+  own_team_id uuid [not null]
+  season_id uuid [not null]
+  competition_id uuid
+  appearances int [not null, default: 0]
+  starts int [not null, default: 0]
+  minutes_played int [not null, default: 0]
+  goals int [not null, default: 0]
+  assists int [not null, default: 0]
+  xg numeric
+  xa numeric
+  extended_stats jsonb
+  calculated_at timestamp
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (player_id, own_team_id, season_id, competition_id) [unique]
+    player_id
+    own_team_id
+    season_id
+    competition_id
+  }
+}
+
+Table team_season_stats {
+  id uuid [pk]
+  own_team_id uuid [not null]
+  season_id uuid [not null]
+  competition_id uuid
+  matches_played int [not null, default: 0]
+  wins int [not null, default: 0]
+  draws int [not null, default: 0]
+  losses int [not null, default: 0]
+  goals_for int [not null, default: 0]
+  goals_against int [not null, default: 0]
+  xg_for numeric
+  xg_against numeric
+  extended_stats jsonb
+  calculated_at timestamp
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (own_team_id, season_id, competition_id) [unique]
+    own_team_id
+    season_id
+    competition_id
+  }
+}
+
+Table player_availability {
+  id uuid [pk]
+  player_id uuid [not null]
+  own_team_id uuid [not null]
+  availability_status varchar [not null]
+  reason_type varchar
+  reason text
+  start_date date [not null]
+  expected_return_date date
+  actual_return_date date
+  medical_notes text
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    player_id
+    own_team_id
+    availability_status
+    start_date
+  }
+}
+
+Table scouting_notes {
+  id uuid [pk]
+  player_id uuid
+  opponent_team_id uuid
+  match_id uuid
+  author_id uuid [not null]
+  note_type varchar
+  title varchar
+  notes text [not null]
+  tags jsonb
+  visibility varchar [not null, default: 'INTERNAL']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    player_id
+    opponent_team_id
+    match_id
+    author_id
+    note_type
+  }
+}
+
+Table opposition_analyses {
+  id uuid [pk]
+  match_id uuid [not null]
+  opponent_team_id uuid [not null]
+  analyst_id uuid
+  summary text
+  strengths jsonb
+  weaknesses jsonb
+  attacking_patterns jsonb
+  defensive_patterns jsonb
+  transition_patterns jsonb
+  key_players jsonb
+  threats jsonb
+  opportunities jsonb
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    match_id
+    opponent_team_id
+    analyst_id
+  }
+}
+
+Table tactical_plans {
+  id uuid [pk]
+  match_id uuid [not null]
+  own_team_id uuid [not null]
+  created_by uuid
+  formation varchar
+  game_model varchar
+  in_possession_plan text
+  out_of_possession_plan text
+  transition_plan text
+  pressing_plan text
+  notes text
+  status varchar [not null, default: 'DRAFT']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    match_id
+    own_team_id
+    status
+  }
+}
+
+Table set_piece_plans {
+  id uuid [pk]
+  match_id uuid [not null]
+  own_team_id uuid [not null]
+  phase varchar [not null] // ATTACKING, DEFENDING
+  set_piece_type varchar [not null]
+  title varchar
+  instructions text
+  assignments jsonb
+  created_by uuid
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    match_id
+    own_team_id
+    phase
+    set_piece_type
+  }
+}
+
+Table team_dynamics_assessments {
+  id uuid [pk]
+  own_team_id uuid [not null]
+  season_id uuid
+  assessed_at timestamp [not null]
+  assessed_by uuid
+  cohesion_score numeric
+  chemistry_score numeric
+  leadership_score numeric
+  morale_score numeric
+  notes text
+  evidence jsonb
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    own_team_id
+    season_id
+    assessed_at
+  }
+}
+
+Table player_relationships {
+  id uuid [pk]
+  own_team_id uuid [not null]
+  player_a_id uuid [not null]
+  player_b_id uuid [not null]
+  relationship_type varchar
+  score numeric
+  sample_size int
+  evidence jsonb
+  calculated_at timestamp
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (own_team_id, player_a_id, player_b_id, relationship_type) [unique]
+    own_team_id
+    player_a_id
+    player_b_id
+  }
+}
+
+Table unit_cohesion {
+  id uuid [pk]
+  own_team_id uuid [not null]
+  season_id uuid
+  unit_type varchar [not null]
+  unit_name varchar
+  score numeric
+  evidence jsonb
+  calculated_at timestamp
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    own_team_id
+    season_id
+    unit_type
+  }
+}
+
+Table analytics_snapshots {
+  id uuid [pk]
+  home_club_id uuid [not null]
+  own_team_id uuid
+  match_id uuid
+  player_id uuid
+  analytics_type varchar [not null]
+  scope_type varchar [not null]
+  title varchar
+  metrics jsonb [not null]
+  explanation text
+  model_version varchar
+  calculated_at timestamp [not null]
+  created_at timestamp [not null]
+
+  indexes {
+    home_club_id
+    own_team_id
+    match_id
+    player_id
+    analytics_type
+    scope_type
+    calculated_at
+  }
+}
+
+Table recommendations {
+  id uuid [pk]
+  home_club_id uuid [not null]
+  own_team_id uuid
+  match_id uuid
+  player_id uuid
+  recommendation_type varchar [not null]
+  title varchar [not null]
+  recommendation text [not null]
+  rationale text
+  priority varchar
+  confidence numeric
+  status varchar [not null, default: 'OPEN']
+  generated_by varchar [not null, default: 'MANUAL']
+  created_by uuid
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    home_club_id
+    own_team_id
+    match_id
+    player_id
+    recommendation_type
+    status
+  }
+}
+
+Table reports {
+  id uuid [pk]
+  home_club_id uuid [not null]
+  own_team_id uuid
+  match_id uuid
+  player_id uuid
+  report_type varchar [not null]
+  title varchar [not null]
+  content jsonb [not null]
+  status varchar [not null, default: 'DRAFT']
+  created_by uuid [not null]
+  approved_by uuid
+  approved_at timestamp
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    home_club_id
+    own_team_id
+    match_id
+    player_id
+    report_type
+    status
+  }
+}
+
+Table data_sources {
+  id uuid [pk]
+  name varchar [not null]
+  source_type varchar [not null] // MANUAL, CSV, EXCEL, API, SCRAPER
+  provider varchar
+  base_url varchar
+  is_active boolean [not null, default: true]
+  configuration jsonb
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    name
+    source_type
+    is_active
+  }
+}
+
+Table data_imports {
+  id uuid [pk]
+  data_source_id uuid [not null]
+  home_club_id uuid
+  import_type varchar [not null]
+  file_name varchar
+  external_reference varchar
+  status varchar [not null, default: 'PENDING']
+  records_received int [not null, default: 0]
+  records_processed int [not null, default: 0]
+  records_failed int [not null, default: 0]
+  error_details jsonb
+  imported_by uuid
+  started_at timestamp
+  completed_at timestamp
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    data_source_id
+    home_club_id
+    import_type
+    status
+  }
+}
+
+// Relationships
+
+Ref: users.home_club_id > home_clubs.id
+Ref: home_clubs.home_venue_id > venues.id
+Ref: own_teams.home_club_id > home_clubs.id
+
+Ref: user_roles.user_id > users.id
+Ref: user_roles.role_id > roles.id
+Ref: user_roles.assigned_by > users.id
+
+Ref: role_permissions.role_id > roles.id
+Ref: role_permissions.permission_id > permissions.id
+
+Ref: approval_workflows.module_id > system_modules.id
+Ref: approval_stages.workflow_id > approval_workflows.id
+Ref: approval_stage_approvers.approval_stage_id > approval_stages.id
+Ref: approval_stage_approvers.role_id > roles.id
+Ref: approval_stage_approvers.user_id > users.id
+
+Ref: approval_requests.workflow_id > approval_workflows.id
+Ref: approval_requests.module_id > system_modules.id
+Ref: approval_requests.submitted_by > users.id
+
+Ref: approval_actions.approval_request_id > approval_requests.id
+Ref: approval_actions.approval_stage_id > approval_stages.id
+Ref: approval_actions.action_by > users.id
+
+Ref: audit_logs.changed_by > users.id
+
+// Football domain relationships
+
+Ref: opponent_teams.opponent_club_id > opponent_clubs.id
+
+Ref: players.primary_position_id > player_positions.id
+
+Ref: team_players.own_team_id > own_teams.id
+Ref: team_players.player_id > players.id
+Ref: team_players.season_id > seasons.id
+Ref: team_players.position_id > player_positions.id
+
+Ref: competition_seasons.competition_id > competitions.id
+Ref: competition_seasons.season_id > seasons.id
+
+Ref: team_competitions.own_team_id > own_teams.id
+Ref: team_competitions.competition_season_id > competition_seasons.id
+
+Ref: fixtures.own_team_id > own_teams.id
+Ref: fixtures.opponent_team_id > opponent_teams.id
+Ref: fixtures.competition_season_id > competition_seasons.id
+Ref: fixtures.venue_id > venues.id
+
+Ref: matches.fixture_id > fixtures.id
+
+Ref: match_contexts.match_id > matches.id
+
+Ref: match_lineups.match_id > matches.id
+Ref: match_lineup_players.lineup_id > match_lineups.id
+Ref: match_lineup_players.player_id > players.id
+Ref: match_lineup_players.position_id > player_positions.id
+
+Ref: match_events.match_id > matches.id
+Ref: match_events.player_id > players.id
+
+Ref: player_match_stats.match_id > matches.id
+Ref: player_match_stats.player_id > players.id
+Ref: player_match_stats.own_team_id > own_teams.id
+
+Ref: team_match_stats.match_id > matches.id
+
+Ref: player_season_stats.player_id > players.id
+Ref: player_season_stats.own_team_id > own_teams.id
+Ref: player_season_stats.season_id > seasons.id
+Ref: player_season_stats.competition_id > competitions.id
+
+Ref: team_season_stats.own_team_id > own_teams.id
+Ref: team_season_stats.season_id > seasons.id
+Ref: team_season_stats.competition_id > competitions.id
+
+Ref: player_availability.player_id > players.id
+Ref: player_availability.own_team_id > own_teams.id
+
+Ref: scouting_notes.player_id > players.id
+Ref: scouting_notes.opponent_team_id > opponent_teams.id
+Ref: scouting_notes.match_id > matches.id
+Ref: scouting_notes.author_id > users.id
+
+Ref: opposition_analyses.match_id > matches.id
+Ref: opposition_analyses.opponent_team_id > opponent_teams.id
+Ref: opposition_analyses.analyst_id > users.id
+
+Ref: tactical_plans.match_id > matches.id
+Ref: tactical_plans.own_team_id > own_teams.id
+Ref: tactical_plans.created_by > users.id
+
+Ref: set_piece_plans.match_id > matches.id
+Ref: set_piece_plans.own_team_id > own_teams.id
+Ref: set_piece_plans.created_by > users.id
+
+Ref: team_dynamics_assessments.own_team_id > own_teams.id
+Ref: team_dynamics_assessments.season_id > seasons.id
+Ref: team_dynamics_assessments.assessed_by > users.id
+
+Ref: player_relationships.own_team_id > own_teams.id
+Ref: player_relationships.player_a_id > players.id
+Ref: player_relationships.player_b_id > players.id
+
+Ref: unit_cohesion.own_team_id > own_teams.id
+Ref: unit_cohesion.season_id > seasons.id
+
+Ref: analytics_snapshots.home_club_id > home_clubs.id
+Ref: analytics_snapshots.own_team_id > own_teams.id
+Ref: analytics_snapshots.match_id > matches.id
+Ref: analytics_snapshots.player_id > players.id
+
+Ref: recommendations.home_club_id > home_clubs.id
+Ref: recommendations.own_team_id > own_teams.id
+Ref: recommendations.match_id > matches.id
+Ref: recommendations.player_id > players.id
+Ref: recommendations.created_by > users.id
+
+Ref: reports.home_club_id > home_clubs.id
+Ref: reports.own_team_id > own_teams.id
+Ref: reports.match_id > matches.id
+Ref: reports.player_id > players.id
+Ref: reports.created_by > users.id
+Ref: reports.approved_by > users.id
+
+Ref: data_imports.data_source_id > data_sources.id
+Ref: data_imports.home_club_id > home_clubs.id
+Ref: data_imports.imported_by > users.id

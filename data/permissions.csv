@@ -1,9 +1,9 @@
 id,module_code,action_code,name,description,created_at,updated_at
-abb69e88-31f1-4ca3-91fe-6cf7bc380b10,USERS,CREATE,Create Users,Allows the 'CREATE' action on the 'USERS' module,2026-08-01 09:00:00,2026-08-01 09:00:00
-26cffbe1-7578-4139-9ff8-83407e73a8a3,USERS,READ,View Users,Allows the 'READ' action on the 'USERS' module,2026-08-01 09:00:00,2026-08-01 09:00:00
-b5b2ff32-e945-4bca-8955-284ca5e73d60,OWN_TEAMS,CREATE,Create Own Teams,Allows the 'CREATE' action on the 'OWN_TEAMS' module,2026-08-01 09:00:00,2026-08-01 09:00:00
-dce16413-d0cc-4921-ba30-ed6f347f9c1e,OWN_TEAMS,UPDATE,Update Own Teams,Allows the 'UPDATE' action on the 'OWN_TEAMS' module,2026-08-01 09:00:00,2026-08-01 09:00:00
-3dd58151-55c1-430e-8098-4ca8b84e1e0f,APPROVALS,APPROVE,Approve Requests,Allows the 'APPROVE' action on the 'APPROVALS' module,2026-08-01 09:00:00,2026-08-01 09:00:00
-de3ea140-fc55-4096-9164-1a262f3810bf,APPROVALS,REJECT,Reject Requests,Allows the 'REJECT' action on the 'APPROVALS' module,2026-08-01 09:00:00,2026-08-01 09:00:00
-28a2b3b9-1712-40fe-8c91-8314bae356c9,AUDIT,READ,View Audit Logs,Allows the 'READ' action on the 'AUDIT' module,2026-08-01 09:00:00,2026-08-01 09:00:00
-bdd9baa5-8e32-4271-8685-0f304ab733e4,SYSTEM,CONFIGURE,Configure System Modules,Allows the 'CONFIGURE' action on the 'SYSTEM' module,2026-08-01 09:00:00,2026-08-01 09:00:00
+fe7c0823-d133-428e-b887-d586996224e5,USERS,CREATE,Create Users,Allows the 'CREATE' action on the 'USERS' module,2026-08-01 09:00:00,2026-08-01 09:00:00
+b382bed3-d002-4a44-b025-ed50870e3f22,USERS,READ,View Users,Allows the 'READ' action on the 'USERS' module,2026-08-01 09:00:00,2026-08-01 09:00:00
+8318002f-6d4b-44b4-b45e-9e6185da1f4c,OWN_TEAMS,CREATE,Create Own Teams,Allows the 'CREATE' action on the 'OWN_TEAMS' module,2026-08-01 09:00:00,2026-08-01 09:00:00
+ef29baca-6822-4cf4-85d6-88ef6a02d284,OWN_TEAMS,UPDATE,Update Own Teams,Allows the 'UPDATE' action on the 'OWN_TEAMS' module,2026-08-01 09:00:00,2026-08-01 09:00:00
+6b9acfc2-7611-44f1-aea8-308ba5245e05,APPROVALS,APPROVE,Approve Requests,Allows the 'APPROVE' action on the 'APPROVALS' module,2026-08-01 09:00:00,2026-08-01 09:00:00
+27e73dfb-924a-4fcc-b8f0-4a689a566a9a,APPROVALS,REJECT,Reject Requests,Allows the 'REJECT' action on the 'APPROVALS' module,2026-08-01 09:00:00,2026-08-01 09:00:00
+70046300-d977-429d-b829-7304bfd8e11f,AUDIT,READ,View Audit Logs,Allows the 'READ' action on the 'AUDIT' module,2026-08-01 09:00:00,2026-08-01 09:00:00
+ee9b9d5c-d68c-4c1e-b71f-e23bfbff71ca,SYSTEM,CONFIGURE,Configure System Modules,Allows the 'CONFIGURE' action on the 'SYSTEM' module,2026-08-01 09:00:00,2026-08-01 09:00:00

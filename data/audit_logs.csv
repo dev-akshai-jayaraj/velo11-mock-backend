@@ -1,9 +1,9 @@
 id,module_code,record_id,action,changed_by,old_value,new_value,source_type,changed_at
-a5b3d060-61d8-4f39-a77a-475ff32924f9,OWN_TEAMS,b7c85945-8d0e-4186-a592-c40d98538407,CREATE,ef1753b7-83d4-4098-b691-30f9e915db74,,"{""status"": ""ACTIVE""}",MANUAL,2026-07-26 09:00:00
-2bb80090-9764-46ae-87e4-8d04bf96b9f0,OWN_TEAMS,b7c85945-8d0e-4186-a592-c40d98538407,UPDATE,afbf3de4-6fcb-4c91-a231-487628fafedb,"{""status"": ""ACTIVE""}","{""status"": ""ACTIVE"", ""age_group"": ""SENIOR""}",MANUAL,2026-07-28 09:00:00
-d2840a92-b539-4569-979d-fabc2eeecf9d,USERS,57eb169a-ccf6-4f2c-9ad9-49126a22068d,CREATE,8ab7f050-32f3-410f-862f-023381a8d705,,"{""status"": ""ACTIVE""}",MANUAL,2026-07-24 09:00:00
-91b42c56-a7e4-4138-9c20-00447474e0f5,APPROVALS,fb50b39a-acec-44bf-824c-72a0ca077968,UPDATE,bce7cf8f-501c-4640-8829-28bec5dfdf55,"{""current_status"": ""SUBMITTED""}","{""current_status"": ""REJECTED""}",SYSTEM,2026-07-23 09:00:00
-4bfc9280-42ea-4103-8a7e-7919aef6ba9c,ROLES,7c2b6a40-5b81-4fad-9c03-6338c7b32908,UPDATE,afbf3de4-6fcb-4c91-a231-487628fafedb,"{""description"": null}","{""description"": ""Full access to manage club data""}",MANUAL,2026-07-12 09:00:00
-5eb09bed-0dca-4522-96de-5dbd632f70a4,USERS,bce7cf8f-501c-4640-8829-28bec5dfdf55,UPDATE,8ab7f050-32f3-410f-862f-023381a8d705,"{""status"": ""PENDING""}","{""status"": ""ACTIVE""}",SYSTEM,2026-07-26 09:00:00
-8c91e779-5e23-457b-bb92-25ba20a17a07,OWN_TEAMS,1665a70b-4570-4f91-9e04-faa1242b2c56,DELETE,bce7cf8f-501c-4640-8829-28bec5dfdf55,"{""status"": ""ACTIVE""}",,MANUAL,2026-07-29 09:00:00
-23b53362-10fd-4790-be72-1fdce3a070c2,SYSTEM_MODULES,fd452430-fcca-4c55-999e-4a07df064320,CREATE,afbf3de4-6fcb-4c91-a231-487628fafedb,,"{""is_active"": true}",MANUAL,2026-07-02 09:00:00
+3a67036b-9954-48dc-9763-9d61aae68925,OWN_TEAMS,dc3e632f-f76e-4d7e-bb52-c3f2db34c898,CREATE,9cb805d6-dcf1-4da2-ad45-4f7f6de3a05e,,"{""status"": ""ACTIVE""}",MANUAL,2026-07-26 09:00:00
+33522472-9b4b-424c-8fe2-ab0067e2aee4,OWN_TEAMS,dc3e632f-f76e-4d7e-bb52-c3f2db34c898,UPDATE,f552c82e-d903-4640-9350-dd55437b5246,"{""status"": ""ACTIVE""}","{""status"": ""ACTIVE"", ""age_group"": ""SENIOR""}",MANUAL,2026-07-28 09:00:00
+f1edb2b5-3f4e-4f20-8531-50819c4510cf,USERS,388d37c7-cf8a-40d6-b572-d26e07ba9ac4,CREATE,99a50621-e3f8-45d1-9c14-ff22151a251b,,"{""status"": ""ACTIVE""}",MANUAL,2026-07-24 09:00:00
+babf323a-139d-41f9-ad3c-48467517378a,APPROVALS,3724c057-3a38-4c01-be4f-f786f610e605,UPDATE,b9ec2f27-7849-4b67-8130-b5b9823ea6e7,"{""current_status"": ""SUBMITTED""}","{""current_status"": ""REJECTED""}",SYSTEM,2026-07-23 09:00:00
+58bc7a4c-26fd-4a2d-a532-ad16b6de8b12,ROLES,0a2c301d-30c6-4a21-aef1-c4ae272e79c1,UPDATE,f552c82e-d903-4640-9350-dd55437b5246,"{""description"": null}","{""description"": ""Full access to manage club data""}",MANUAL,2026-07-12 09:00:00
+44767209-0c33-4a75-b0ac-72dec3bdcab8,USERS,b9ec2f27-7849-4b67-8130-b5b9823ea6e7,UPDATE,99a50621-e3f8-45d1-9c14-ff22151a251b,"{""status"": ""PENDING""}","{""status"": ""ACTIVE""}",SYSTEM,2026-07-26 09:00:00
+5e011da5-3440-4352-8a61-015a5eedf628,OWN_TEAMS,c39bbf90-f6f0-4170-bc38-4cd61cb688a0,DELETE,b9ec2f27-7849-4b67-8130-b5b9823ea6e7,"{""status"": ""ACTIVE""}",,MANUAL,2026-07-29 09:00:00
+bd71ba80-3619-4d41-81e0-c074f2aa593d,SYSTEM_MODULES,e7340305-5877-446d-933f-c86c5265ce14,CREATE,f552c82e-d903-4640-9350-dd55437b5246,,"{""is_active"": true}",MANUAL,2026-07-02 09:00:00

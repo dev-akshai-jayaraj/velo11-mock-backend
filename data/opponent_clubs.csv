@@ -1,0 +1,5 @@
+id,name,short_name,logo_url,country,city,status,created_at,updated_at
+cf153ac0-7e04-42a5-950a-6c5606b7b70e,Northbridge Rovers,NBR,https://example.com/logos/nbr.png,England,Newcastle,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00
+3aab88d6-5cbc-4457-9651-82afb2b4cf1d,Southport Athletic,SPA,https://example.com/logos/spa.png,England,Southampton,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00
+b1989b42-a2ab-4332-8445-cbd62775305e,Midlands United,MDU,https://example.com/logos/mdu.png,England,Birmingham,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00
+a130ed08-8109-4a96-a68d-39a598ced0ce,Riverside Town,RST,https://example.com/logos/rst.png,England,Nottingham,ACTIVE,2026-08-01 09:00:00,2026-08-01 09:00:00
